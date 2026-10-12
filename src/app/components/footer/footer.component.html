@@ -1,0 +1,134 @@
+
+<footer class="footer">
+  <!-- Animated sky background -->
+  <div class="footer__sky" aria-hidden="true">
+    <div class="footer__moon"></div>
+    <div class="footer__cloud footer__cloud--one"></div>
+    <div class="footer__cloud footer__cloud--two"></div>
+    <div class="footer__cloud footer__cloud--three"></div>
+
+    <span class="footer__star footer__star--1"></span>
+    <span class="footer__star footer__star--2"></span>
+    <span class="footer__star footer__star--3"></span>
+    <span class="footer__star footer__star--4"></span>
+    <span class="footer__star footer__star--5"></span>
+    <span class="footer__star footer__star--6"></span>
+    <span class="footer__star footer__star--7"></span>
+    <span class="footer__star footer__star--8"></span>
+
+    <div class="footer__horizon"></div>
+  </div>
+
+  <div class="container footer__grid">
+    <!-- Brand -->
+    <div class="footer__column footer__intro">
+      <p class="footer__brand">
+        <span class="footer__brand-icon">✧</span>
+        {{ site.brandName }}
+      </p>
+
+      <p class="footer__text">
+        A safe, confidential and supportive space for personal growth,
+        emotional wellbeing and positive change.
+      </p>
+
+      <div class="footer__social">
+        @if (site.instagram) {
+          <a [href]="site.instagram"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Instagram">
+            <app-icon name="instagram" />
+          </a>
+        }
+
+        @if (site.facebook) {
+          <a [href]="site.facebook"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Facebook">
+            <app-icon name="facebook" />
+          </a>
+        }
+
+        @if (!site.instagram && !site.facebook) {
+          <span class="footer__muted">Connect with us soon</span>
+        }
+      </div>
+
+      <p class="footer__tagline">Your peace matters. Your journey matters.</p>
+    </div>
+
+    <!-- Quick links -->
+    <nav class="footer__column" aria-label="Quick links">
+      <h2 class="footer__title">Explore</h2>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/about">About us</a></li>
+        <li><a routerLink="/services">Our services</a></li>
+        <li><a routerLink="/booking">Book a session</a></li>
+        <li><a routerLink="/contact">Contact us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Services -->
+    <nav class="footer__column" aria-label="Services">
+      <h2 class="footer__title">Our services</h2>
+      <ul>
+        @for (s of services; track s.id) {
+          <li>
+            <a routerLink="/services">
+              <span class="footer__link-arrow">↗</span>
+              {{ s.title }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Contact -->
+    <div class="footer__column">
+      <h2 class="footer__title">Get in touch</h2>
+
+      <ul class="footer__contact">
+        <li>
+          <span class="footer__contact-icon">☎</span>
+          <span>{{ site.phone }}</span>
+        </li>
+        <li>
+          <span class="footer__contact-icon">✉</span>
+          <span>{{ site.email }}</span>
+        </li>
+        <li>
+          <span class="footer__contact-icon">⌖</span>
+          <span>{{ site.address }}</span>
+        </li>
+        <li>
+          <span class="footer__contact-icon">☏</span>
+          <a routerLink="/contact">
+            WhatsApp: {{ site.whatsappDisplay }}
+          </a>
+        </li>
+      </ul>
+
+      <a class="footer__book-link" routerLink="/booking">
+        Begin your journey <span>→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>
+      &copy; 2026 {{ site.brandName }}. All rights reserved.
+    </p>
+
+    <div class="footer__legal">
+      <a routerLink="/contact" fragment="privacy">Privacy policy</a>
+      <a routerLink="/contact" fragment="terms">Terms &amp; conditions</a>
+    </div>
+
+    <a class="footer__back-top" href="#top" aria-label="Back to top">
+      ↑
+    </a>
+  </div>
+</footer>

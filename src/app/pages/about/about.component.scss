@@ -1,0 +1,400 @@
+.profile { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.profile__photo { width: 100%; max-width: 440px; height: auto; border-radius: 220px 220px var(--radius) var(--radius); box-shadow: var(--shadow-lg); margin-inline: auto; background: var(--beige); }
+.profile__title { color: var(--gold-text); font-weight: 600; margin-bottom: 1.5rem; }
+.facts { display: grid; gap: 0.9rem; margin: 0 0 1.5rem; div { padding-bottom: 0.9rem; border-bottom: 1px solid var(--beige-deep); } dt { font-weight: 600; color: var(--green); font-size: 0.9rem; } dd { margin: 0; color: var(--muted); } }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+.conf { display: flex; gap: 1.5rem; align-items: flex-start; p { margin: 0; color: var(--muted); } h2 { font-size: 1.6rem; } }
+.conf__icon { flex: none; width: 56px; height: 56px; border-radius: 16px; background: var(--beige); color: var(--green); display: grid; place-items: center; }
+@media (max-width: 800px) { .profile, .split { grid-template-columns: 1fr; } .conf { flex-direction: column; } }
+
+.conf{
+     background:
+    linear-gradient(
+      rgba(244, 240, 230, 0.72),
+      rgba(244, 240, 230, 0.82)
+    ),
+    url("/assets/hero-peaceful.jpg") center 45% / cover no-repeat;
+
+  transform: scale(1.04);
+}
+
+
+/* ===== Interactive counsellor profile ===== */
+
+.profile-section {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 18% 45%, rgba(173, 157, 255, 0.13), transparent 42%),
+    linear-gradient(135deg, #fbf9ff, #f5f7ff 55%, #fffdf8);
+}
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.85fr) minmax(280px, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* Interactive circular device */
+
+.profile-orb {
+  position: relative;
+  width: min(100%, 330px);
+  aspect-ratio: 1;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orb-ring--outer {
+  border: 2px solid rgba(65, 155, 122, 0.42);
+  box-shadow: 0 0 28px rgba(62, 170, 126, 0.12);
+  animation: orb-breathe 3s ease-in-out infinite;
+}
+
+.orb-ring--middle {
+  inset: 13px;
+  border: 2px dashed rgba(125, 103, 222, 0.5);
+  animation: orb-rotate 18s linear infinite;
+}
+
+.orb-ring--inner {
+  inset: 27px;
+  border: 1px solid rgba(53, 139, 107, 0.65);
+  box-shadow: inset 0 0 25px rgba(112, 215, 175, 0.12);
+  transition: inset 0.65s ease, border-color 0.5s ease;
+}
+
+.orb-core {
+  position: relative;
+  z-index: 2;
+  width: 69%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.95);
+  background: linear-gradient(145deg, #e3f7ec, #e8e3ff);
+  box-shadow: 0 12px 40px rgba(46, 69, 80, 0.17);
+  transition: transform 0.55s ease, box-shadow 0.55s ease;
+}
+
+.orb-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.orb-symbol {
+  position: absolute;
+  right: 3px;
+  bottom: 5px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: #185b46;
+  color: white;
+  font-size: 22px;
+  box-shadow: 0 4px 16px rgba(24, 91, 70, 0.25);
+  transition: transform 0.35s ease;
+}
+
+.orb-pulse {
+  position: absolute;
+  z-index: -1;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(115, 224, 177, 0.2);
+  animation: orb-pulse 2.8s ease-out infinite;
+}
+
+.profile-orb:hover .orb-core,
+.profile-orb:focus-visible .orb-core {
+  transform: scale(1.04);
+  box-shadow: 0 0 40px rgba(91, 192, 146, 0.3);
+}
+
+.profile-orb--active .orb-ring--middle {
+  animation-duration: 3s;
+}
+
+.profile-orb--active .orb-ring--outer {
+  border-color: #48b98b;
+  box-shadow: 0 0 38px rgba(72, 185, 139, 0.35);
+}
+
+.profile-orb--active .orb-ring--inner {
+  inset: 7px;
+  border-color: #8d7bea;
+}
+
+.profile-orb--active .orb-core {
+  transform: scale(0.96);
+  box-shadow: 0 0 38px rgba(92, 191, 145, 0.4);
+}
+
+.profile-orb--active .orb-symbol {
+  transform: rotate(360deg);
+}
+
+.profile-orb:focus-visible,
+.reveal-button:focus-visible {
+  outline: 3px solid #7965d8;
+  outline-offset: 6px;
+}
+
+/* Introduction */
+
+.profile-intro {
+  max-width: 490px;
+}
+
+.profile-eyebrow,
+.details-label,
+.detail-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #6b65a7;
+}
+
+.profile-intro h2 {
+  margin: 1rem 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.12;
+  color: #243e38;
+}
+
+.profile-lead {
+  max-width: 430px;
+  color: #68747b;
+  line-height: 1.9;
+}
+
+.reveal-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 1rem;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #173e34;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.reveal-button:hover {
+  background: #286b53;
+  transform: translateY(-2px);
+}
+
+.orb-hint {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 1.25rem;
+  color: #74768c;
+  font-size: 0.85rem;
+}
+
+.status-dot,
+.details-indicator span {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: #45b987;
+  box-shadow: 0 0 10px rgba(69, 185, 135, 0.4);
+}
+
+/* Revealed profile card */
+
+.profile-details {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(25px) scale(0.98);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s ease,
+    visibility 0.55s;
+}
+
+.profile-details--visible {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.details-card {
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(148, 136, 211, 0.25);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 60px rgba(67, 64, 108, 0.09);
+  backdrop-filter: blur(14px);
+}
+
+.details-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.details-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: #367e60;
+}
+
+.details-card h3 {
+  margin: 1.5rem 0 0.3rem;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  color: #24473b;
+}
+
+.details-role {
+  margin: 0;
+  color: #77719f;
+}
+
+.details-divider {
+  height: 1px;
+  margin: 1.5rem 0;
+  background: linear-gradient(90deg, #b6a9f2, transparent);
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 1.5rem 0;
+}
+
+.detail-icon {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #f0edff;
+  color: #6c5ec2;
+  font-size: 1.3rem;
+}
+
+.detail-label {
+  display: block;
+  margin: 2px 0 6px;
+}
+
+.detail-item p {
+  margin: 0;
+  color: #657078;
+  line-height: 1.75;
+}
+
+.details-book {
+  display: inline-flex;
+  margin-top: 0.5rem;
+}
+
+/* Motion */
+
+@keyframes orb-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orb-breathe {
+  50% { transform: scale(1.025); opacity: 0.7; }
+}
+
+@keyframes orb-pulse {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .profile-orb {
+    width: min(78vw, 290px);
+  }
+
+  .profile-intro {
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .profile-lead {
+    margin-inline: auto;
+  }
+
+  .orb-hint {
+    justify-content: center;
+  }
+
+  .profile-details {
+    grid-column: 1;
+  }
+
+  .details-card__top {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-ring,
+  .orb-pulse {
+    animation: none !important;
+  }
+
+  .profile-details,
+  .orb-core,
+  .orb-symbol,
+  .reveal-button {
+    transition: none !important;
+  }
+}

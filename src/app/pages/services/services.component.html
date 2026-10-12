@@ -1,0 +1,142 @@
+
+<!-- Animated services hero -->
+<section class="services-hero">
+  <div class="hero-stars" aria-hidden="true">
+    <span class="star star-1">✦</span>
+    <span class="star star-2">✧</span>
+    <span class="star star-3">✦</span>
+    <span class="star star-4">✧</span>
+    <span class="star star-5">✦</span>
+    <span class="star star-6">✧</span>
+    <span class="star star-7">✦</span>
+    <span class="star star-8">✧</span>
+  </div>
+
+  <div class="hero-orb hero-orb--one" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb--two" aria-hidden="true"></div>
+
+  <div class="container services-hero__content">
+    <span class="services-eyebrow">
+      <span class="eyebrow-dot"></span>
+      YOUR SPACE TO HEAL AND GROW
+    </span>
+
+    <h2>
+      A little support can
+      <span class="gradient-text">change everything.</span>
+    </h2>
+
+    <p class="services-hero__description">
+      Choose the kind of support that fits where you are right now.
+      You don't have to have all the answers before you begin.
+    </p>
+
+    <div class="hero-note">
+      <span class="hero-note__icon">✧</span>
+      <span>Not sure where to start? That's perfectly okay.</span>
+    </div>
+
+    <a class="hero-discover" href="#all-services">
+      <span>Discover your options</span>
+      <span class="discover-arrow">↓</span>
+    </a>
+  </div>
+
+  <div class="hero-bottom-glow" aria-hidden="true"></div>
+</section>
+
+<!-- Services cards -->
+<section
+  class="section services-list-section"
+  id="all-services"
+  aria-labelledby="all-services-title"
+>
+  <div class="container">
+    <div class="services-section-heading">
+      <span class="section-kicker">FIND YOUR PATH</span>
+
+      <h2 id="all-services-title">
+        Support for every
+        <span class="gradient-text">chapter of life</span>
+      </h2>
+
+      <p>
+        Every journey is different. Find a space where you can
+        pause, reflect and take your next step at your own pace.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      @for (s of services; track s.id; let i = $index) {
+        <div
+          class="service-reveal"
+          [style.--card-index]="i"
+        >
+          <app-service-card [service]="s" />
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Who can benefit -->
+<section
+  class="who-section"
+  aria-labelledby="who-title"
+>
+  <div class="who-stars" aria-hidden="true">
+    <span>✧</span>
+    <span>✦</span>
+    <span>✧</span>
+    <span>✦</span>
+    <span>✧</span>
+  </div>
+
+  <div class="container who-layout">
+    <div class="who-content">
+      <span class="section-kicker">A SPACE JUST FOR YOU</span>
+
+      <h2 id="who-title">
+        You don't have to
+        <span class="gradient-text">figure it all out alone.</span>
+      </h2>
+
+      <p class="who-description">
+        You do not need to be in crisis to speak with a counsellor.
+        Sometimes, having someone listen without judgement is a
+        meaningful place to start.
+      </p>
+
+      <div class="who-quote">
+        <span class="quote-mark">“</span>
+        <p>
+          You deserve the same kindness and understanding
+          that you offer to everyone else.
+        </p>
+      </div>
+    </div>
+
+    <div class="who-list-panel">
+      <div class="who-list-heading">
+        <span class="who-list-icon">✧</span>
+        <h3>Counselling may help when you want to...</h3>
+      </div>
+
+      <ul class="who-list">
+        @for (w of who; track w; let i = $index) {
+          <li [style.--item-index]="i">
+            <span class="check-orb" aria-hidden="true">✓</span>
+            <span>{{ w }}</span>
+            <span class="list-sparkle" aria-hidden="true">✧</span>
+          </li>
+        }
+      </ul>
+
+      <p class="who-reassurance">
+        Your story matters. Your pace matters.
+      </p>
+    </div>
+  </div>
+</section>
+
+<app-cta-banner />

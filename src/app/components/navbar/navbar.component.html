@@ -1,0 +1,86 @@
+<header
+  class="nav"
+  [class.nav--scrolled]="scrolled()"
+  [class.nav--open]="open()"
+>
+  <div class="container nav__inner">
+
+    <!-- Brand -->
+    <a
+      routerLink="/"
+      class="nav__brand"
+      (click)="close()"
+      [attr.aria-label]="site.brandName + ' - home'"
+    >
+      <span class="nav__logo-wrap">
+        <img
+          [src]="site.logoPath"
+          alt=""
+          class="nav__logo"
+          aria-hidden="true"
+        />
+      </span>
+
+      <span class="nav__brand-copy">
+        <span class="nav__brand-text">AGcONS</span>
+        <span class="nav__tagline">FOR UR PEACEFULL MIND</span>
+      </span>
+    </a>
+
+    <!-- Navigation -->
+    <nav
+      id="main-nav"
+      class="nav__menu"
+      aria-label="Main navigation"
+    >
+      <ul>
+        @for (l of links; track l.path) {
+          <li>
+            <a
+              [routerLink]="l.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: l.exact }"
+              (click)="close()"
+            >
+              <span>{{ l.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+
+      <a
+        routerLink="/booking"
+        class="nav__cta-mobile"
+        (click)="close()"
+      >
+        <span>Book a Session</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a
+      routerLink="/booking"
+      class="nav__cta"
+    >
+      <span class="nav__cta-icon" aria-hidden="true">✦</span>
+      <span>Book a Session</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button
+      class="nav__toggle"
+      type="button"
+      (click)="toggle()"
+      [attr.aria-expanded]="open()"
+      aria-controls="main-nav"
+      [attr.aria-label]="open() ? 'Close menu' : 'Open menu'"
+    >
+      <app-icon
+        [name]="open() ? 'close' : 'menu'"
+        [size]="25"
+      />
+    </button>
+
+  </div>
+</header>

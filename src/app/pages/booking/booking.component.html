@@ -1,0 +1,320 @@
+
+<section class="booking-hero">
+  <div class="booking-hero__glow"></div>
+  <div class="container booking-hero__content">
+    <span class="eyebrow">YOUR WELL-BEING MATTERS</span>
+    <h1>Book a Session</h1>
+    <p>
+      Tell us when you would like to meet. We will contact you
+      to confirm your appointment.
+    </p>
+    <span class="hero-line"></span>
+    <span class="hero-note">Small steps create big changes ✧</span>
+  </div>
+</section>
+
+<section class="booking-section">
+  <div class="booking-shell">
+
+    <!-- Main booking form -->
+    <div class="booking-main">
+
+      @if (status() === 'success') {
+        <div class="success-card" role="status" aria-live="polite">
+          <span class="success-icon">
+            <app-icon name="check" [size]="32" />
+          </span>
+          <span class="eyebrow">THANK YOU FOR REACHING OUT</span>
+          <h2>Request received</h2>
+          <p>
+            Your counselling request has been received. We will contact
+            you shortly to confirm your appointment.
+          </p>
+          <div class="success-actions">
+            <a class="btn btn--whatsapp"
+               [href]="whatsappUrl()"
+               target="_blank"
+               rel="noopener noreferrer">
+              <app-icon name="whatsapp" [size]="22" />
+              Continue on WhatsApp
+            </a>
+          </div>
+          <p class="form-hint">
+            You will need to press send in WhatsApp yourself.
+          </p>
+        </div>
+      } @else {
+
+        <div class="safety-notice" role="note">
+          <span class="notice-icon">
+            <app-icon name="info" [size]="21" />
+          </span>
+          <div>
+            <strong>A gentle reminder</strong>
+            <p>
+              This form is for appointment enquiries only, not an emergency
+              service. If someone is in immediate danger, contact local
+              emergency services.
+            </p>
+          </div>
+        </div>
+
+        <form class="booking-form"
+              [formGroup]="form"
+              (ngSubmit)="submit()"
+              novalidate
+              aria-label="Appointment request form">
+
+          <div class="form-heading">
+            <span class="eyebrow">LET'S START WITH A CONVERSATION</span>
+            <h2>Your session, your pace.</h2>
+            <p>Complete the details below to request an appointment.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="fullName">Full name <span class="req">*</span></label>
+              <input id="fullName" type="text" formControlName="fullName"
+                     autocomplete="name" placeholder="Enter your full name"
+                     [class.invalid]="showError('fullName')"
+                     [attr.aria-invalid]="showError('fullName')"
+                     aria-describedby="err-fullName">
+              @if (showError('fullName')) {
+                <p class="error-text" id="err-fullName">
+                  Please enter your full name.
+                </p>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email address <span class="req">*</span></label>
+              <input id="email" type="email" formControlName="email"
+                     autocomplete="email" placeholder="you@example.com"
+                     [class.invalid]="showError('email')"
+                     [attr.aria-invalid]="showError('email')"
+                     aria-describedby="err-email">
+              @if (showError('email')) {
+                <p class="error-text" id="err-email">
+                  Please enter a valid email address.
+                </p>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Phone number <span class="req">*</span></label>
+              <input id="phone" type="tel" formControlName="phone"
+                     autocomplete="tel" placeholder="+91 000 000 0000"
+                     [class.invalid]="showError('phone')"
+                     [attr.aria-invalid]="showError('phone')"
+                     aria-describedby="err-phone">
+              @if (showError('phone')) {
+                <p class="error-text" id="err-phone">
+                  Please enter a valid phone number.
+                </p>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="whatsapp">WhatsApp number</label>
+              <input id="whatsapp" type="tel" formControlName="whatsapp"
+                     placeholder="+91 000 000 0000"
+                     [class.invalid]="showError('whatsapp')"
+                     [attr.aria-invalid]="showError('whatsapp')"
+                     aria-describedby="hint-wa err-whatsapp">
+              <span class="form-hint" id="hint-wa">
+                Optional. Include your country code.
+              </span>
+              @if (showError('whatsapp')) {
+                <p class="error-text" id="err-whatsapp">
+                  Please enter a valid WhatsApp number.
+                </p>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="preferredDate">Preferred date <span class="req">*</span></label>
+              <input id="preferredDate" type="date"
+                     formControlName="preferredDate" [min]="today"
+                     [class.invalid]="showError('preferredDate')"
+                     [attr.aria-invalid]="showError('preferredDate')"
+                     aria-describedby="err-date">
+              @if (showError('preferredDate')) {
+                <p class="error-text" id="err-date">
+                  Please choose a preferred date.
+                </p>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="preferredTime">Preferred time <span class="req">*</span></label>
+              <input id="preferredTime" type="time"
+                     formControlName="preferredTime"
+                     [class.invalid]="showError('preferredTime')"
+                     [attr.aria-invalid]="showError('preferredTime')"
+                     aria-describedby="err-time">
+              @if (showError('preferredTime')) {
+                <p class="error-text" id="err-time">
+                  Please choose a preferred time.
+                </p>
+              }
+            </div>
+
+            <div class="form-field form-field--full">
+              <label for="counsellingType">
+                Counselling type <span class="req">*</span>
+              </label>
+              <select id="counsellingType" formControlName="counsellingType"
+                      [class.invalid]="showError('counsellingType')"
+                      [attr.aria-invalid]="showError('counsellingType')"
+                      aria-describedby="err-type">
+                <option value="" disabled>Select a counselling type</option>
+                @for (t of types; track t) {
+                  <option [value]="t">{{ t }}</option>
+                }
+              </select>
+              @if (showError('counsellingType')) {
+                <p class="error-text" id="err-type">
+                  Please select a counselling type.
+                </p>
+              }
+            </div>
+          </div>
+
+          <fieldset class="mode"
+                    [attr.aria-describedby]="showError('sessionMode') ? 'err-mode' : null">
+            <legend>Preferred session mode <span class="req">*</span></legend>
+            <div class="mode__options">
+              <label class="mode__opt">
+                <input type="radio" formControlName="sessionMode" value="Online">
+                <span><app-icon name="video" [size]="20" /> Online</span>
+              </label>
+              <label class="mode__opt">
+                <input type="radio" formControlName="sessionMode" value="In Person">
+                <span><app-icon name="user" [size]="20" /> In Person</span>
+              </label>
+            </div>
+            @if (showError('sessionMode')) {
+              <p class="error-text" id="err-mode">
+                Please choose Online or In Person.
+              </p>
+            }
+          </fieldset>
+
+          <div class="form-field form-field--full message-field">
+            <label for="message">How can we support you?</label>
+            <textarea id="message" formControlName="message" rows="4"
+                      placeholder="Share a little about what brings you here..."
+                      aria-describedby="hint-msg"></textarea>
+            <span class="form-hint" id="hint-msg">
+              A few words are enough. Please avoid sharing detailed medical
+              or highly sensitive information here.
+            </span>
+          </div>
+
+          <div class="consent-field">
+            <label>
+              <input type="checkbox" formControlName="consent"
+                     [attr.aria-invalid]="showError('consent')"
+                     aria-describedby="err-consent">
+              <span>
+                I understand this is an appointment request and does not
+                guarantee a confirmed appointment.
+              </span>
+            </label>
+            @if (showError('consent')) {
+              <p class="error-text" id="err-consent">
+                Please tick this box to continue.
+              </p>
+            }
+          </div>
+
+          @if (status() === 'error') {
+            <div class="form-error" role="alert">
+              Something went wrong. Please try again or contact us through
+              WhatsApp.
+              <p>
+                <a class="btn btn--whatsapp btn--sm"
+                   [href]="whatsappUrl()"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  Message us on WhatsApp
+                </a>
+              </p>
+            </div>
+          }
+
+          <div class="submit-row">
+            <button class="submit-button" type="submit"
+                    [disabled]="status() === 'sending'">
+              {{ status() === 'sending' ? 'Sending request...' : 'Request a Session' }}
+              <span aria-hidden="true">→</span>
+            </button>
+            <p class="privacy-note">
+              <app-icon name="lock" [size]="19" />
+              Your details are used only to respond to your request.
+            </p>
+          </div>
+        </form>
+      }
+    </div>
+
+    <!-- Premium side panel and anime character -->
+    <aside class="booking-aside">
+      <div class="aside-card">
+        <div class="lotus-icon">✿</div>
+        <span class="eyebrow">A SPACE JUST FOR YOU</span>
+        <h2>Take care of your mind.</h2>
+        <p>There's no need to have everything figured out before you begin.</p>
+
+        <div class="benefit">
+          <span class="benefit-icon">♡</span>
+          <div>
+            <strong>Safe &amp; confidential</strong>
+            <p>Your privacy matters.</p>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <span class="benefit-icon">✧</span>
+          <div>
+            <strong>Professional support</strong>
+            <p>A respectful, non-judgemental space.</p>
+          </div>
+        </div>
+
+        <div class="benefit">
+          <span class="benefit-icon">❀</span>
+          <div>
+            <strong>Personalised care</strong>
+            <p>Support shaped around your needs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="anime-scene" aria-hidden="true">
+        <span class="floating-heart heart-one">♡</span>
+        <span class="floating-heart heart-two">✦</span>
+        <span class="anime-caption">You're not alone.</span>
+        <img src="assets/lavAnime.png"
+             class="anime-character"
+             alt="">
+      </div>
+
+      <div class="whatsapp-card">
+        <span class="whatsapp-card__icon">
+          <app-icon name="whatsapp" [size]="24" />
+        </span>
+        <div>
+          <strong>Need a quicker reply?</strong>
+          <p>You can also reach us on WhatsApp.</p>
+          <a [href]="whatsappUrl()" target="_blank" rel="noopener noreferrer">
+            Continue on WhatsApp →
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="booking-footer-note">You are not alone <span>♡</span></div>
+</section>

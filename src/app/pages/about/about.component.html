@@ -1,0 +1,122 @@
+
+<section class="section profile-section" aria-labelledby="profile-title">
+  <div class="container profile-layout">
+
+    <!-- Interactive Omnitrix-inspired profile -->
+    <button
+      class="profile-orb"
+      type="button"
+      [class.profile-orb--active]="profileRevealed()"
+      (click)="toggleProfile()"
+      [attr.aria-expanded]="profileRevealed()"
+      aria-controls="counsellor-details"
+      [attr.aria-label]="profileRevealed()
+        ? 'Hide counsellor details'
+        : 'Reveal counsellor details'"
+    >
+      <span class="orb-ring orb-ring--outer"></span>
+      <span class="orb-ring orb-ring--middle"></span>
+      <span class="orb-ring orb-ring--inner"></span>
+
+      <span class="orb-core">
+        <img
+          src="assets/freedom.jpg"
+          alt=""
+          class="orb-photo"
+        />
+
+        <span class="orb-symbol" aria-hidden="true">
+          {{ profileRevealed() ? '✓' : '✦' }}
+        </span>
+      </span>
+
+      <span class="orb-pulse"></span>
+    </button>
+
+    <div class="profile-intro">
+      <span class="profile-eyebrow">AGCONS · COUNSELLING & WELLNESS</span>
+
+      <h2 id="profile-title">A little about your counsellor</h2>
+
+      <p class="profile-lead">
+        Every journey begins with a conversation.
+        Tap the profile to discover more about the person
+        who will listen to your story.
+      </p>
+
+      <button
+        type="button"
+        class="reveal-button"
+        (click)="toggleProfile()"
+        [attr.aria-expanded]="profileRevealed()"
+        aria-controls="counsellor-details"
+      >
+        {{ profileRevealed() ? 'Close Profile' : 'Discover My Story' }}
+        <span aria-hidden="true">
+          {{ profileRevealed() ? '−' : '↗' }}
+        </span>
+      </button>
+
+      <p class="orb-hint">
+        <span class="status-dot"></span>
+        {{ profileRevealed() ? 'Profile unlocked' : 'Tap to reveal profile' }}
+      </p>
+    </div>
+
+    <!-- Animated profile details -->
+    <div
+      id="counsellor-details"
+      class="profile-details"
+      [class.profile-details--visible]="profileRevealed()"
+      [attr.aria-hidden]="!profileRevealed()"
+      [inert]="!profileRevealed()"
+    >
+      <div class="details-card">
+        <div class="details-card__top">
+          <span class="details-label">PROFILE / AGCONS</span>
+          <span class="details-indicator">
+            <span></span> INTRODUCTION
+          </span>
+        </div>
+
+        <h3>{{ site.counsellorName }}</h3>
+        <p class="details-role">{{ site.counsellorTitle }}</p>
+
+        <div class="details-divider"></div>
+
+        <div class="detail-item">
+          <span class="detail-icon">✧</span>
+          <div>
+            <span class="detail-label">QUALIFICATIONS</span>
+            <p>[Add verified qualifications]</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-icon">◷</span>
+          <div>
+            <span class="detail-label">EXPERIENCE</span>
+            <p>[Add actual years of experience]</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-icon">♡</span>
+          <div>
+            <span class="detail-label">MY APPROACH</span>
+            <p>
+              I believe every person deserves a welcoming space
+              to express themselves, feel heard, and explore
+              their next steps at their own pace.
+            </p>
+          </div>
+        </div>
+
+        <a routerLink="/booking" class="btn btn--primary details-book">
+          Book a Session
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

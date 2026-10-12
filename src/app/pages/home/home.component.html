@@ -1,0 +1,164 @@
+<app-hero />
+
+<section class="section section--beige why-premium" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section-head center why-premium__head">
+      <span class="why-eyebrow">YOUR COMFORT MATTERS</span>
+      <h2 id="why-title">Why choose us</h2>
+      <p class="lead">
+        Counselling works best when you feel comfortable. That is where we begin.
+      </p>
+    </div>
+
+    <div class="grid grid--4 why-premium__grid">
+      @for (w of why; track w.title) {
+        <div
+          class="card why why-premium__card"
+          [style.background-image]="
+            'linear-gradient(rgba(248, 246, 255, 0.84), rgba(239, 245, 255, 0.90)), url(' + w.image + ')'
+          "
+        >
+          <span class="why__icon why-premium__icon">
+            <app-icon [name]="w.icon" [size]="26" />
+          </span>
+
+          <h3>{{ w.title }}</h3>
+          <p>{{ w.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section benefits-premium" aria-labelledby="benefits-title">
+  <div class="container split">
+    <div class="benefits-content">
+      <span class="benefits-eyebrow">A SPACE FOR YOU</span>
+
+      <h2 id="benefits-title">What counselling can offer</h2>
+
+      <p class="lead">
+        Counselling is a supportive conversation. Many people find it helps them to:
+      </p>
+    </div>
+
+    <ul class="check-list">
+      @for (b of benefits; track b) {
+        <li>
+          <span class="benefit-check" aria-hidden="true">✓</span>
+          <span>{{ b }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+
+
+<section class="section section--services services-premium"
+         aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">YOUR PATH TO WELLBEING</span>
+      <h2 id="services-title">Find the support you need</h2>
+      <p class="lead">
+        Thoughtful guidance for wherever life finds you.
+      </p>
+    </div>
+
+    <div class="services-marquee">
+      <div class="services-track">
+        <div class="services-group">
+          @for (s of featured; track s.id) {
+            <app-service-card [service]="s" />
+          }
+        </div>
+
+        <div class="services-group" aria-hidden="true" inert>
+          @for (s of featured; track s.id) {
+            <app-service-card [service]="s" />
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="services-footer">
+      <span class="services-footer__note">
+        Take your time. Find what feels right.
+      </span>
+
+      <a routerLink="/services" class="services-view-all">
+        Explore all services <span>↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="section booking-steps" aria-labelledby="steps-title">
+  <div class="container">
+    <div class="section-head center">
+      <span class="steps-tag">YOUR JOURNEY, MADE SIMPLE</span>
+      <h2 id="steps-title">Booking takes three simple steps</h2>
+      <p class="steps-intro">
+        A few simple steps to begin your journey towards peace of mind.
+      </p>
+    </div>
+<ol class="steps">
+      @for (s of steps; track s.title; let i = $index) {
+        <li class="card step">
+          <span class="step__num" aria-hidden="true">{{ i + 1 }}</span>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+
+<section class="section section--testimonials" aria-labelledby="testi-title">
+
+  <!-- Floating bubbles outside the grid -->
+  <div class="testi-bubbles" aria-hidden="true">
+    <span class="testi-bubble bubble-1"></span>
+    <span class="testi-bubble bubble-2"></span>
+    <span class="testi-bubble bubble-3"></span>
+    <span class="testi-bubble bubble-4"></span>
+    <span class="testi-bubble bubble-5"></span>
+    <span class="testi-bubble bubble-6"></span>
+    <span class="testi-bubble bubble-7"></span>
+    <span class="testi-bubble bubble-8"></span>
+  </div>
+
+  <div class="container testi-container">
+
+    <div class="section-head center">
+      <span class="testi-eyebrow">YOUR JOURNEY MATTERS</span>
+      <h2 id="testi-title">Kind words from clients</h2>
+      <p class="lead">
+        Every journey is unique. Every story deserves to be heard.
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+      @for (t of testimonials; track $index) {
+        <div class="testi-card">
+          <app-testimonial
+            [quote]="t.quote"
+            [name]="t.name"
+            [note]="t.note"
+          />
+        </div>
+      }
+    </div>
+
+    <div class="testi-footer-note">
+      A gentle reminder: you deserve peace, care, and happiness.
+    </div>
+
+  </div>
+</section>
+
+
+<app-cta-banner />
